@@ -23,8 +23,14 @@ var leqStream = nmt.getLeqStream({
 , password: 'my-password'
 });
 
+// `data` emits raw data stream from socket
 // => 44.7, 45.3, 44.9...
 leqStream.pipe( process.stdout );
+
+// `leq` emits parsed data
+leqStream.on( 'leq', function( leq ){
+  assert( typeof leq === 'number' );
+});
 
 // Optional callback
 leqStream.connect( function( error ){
@@ -55,7 +61,11 @@ Calls `connect` on the underlying source socket. Will callback with `callback( e
 
 ### login( callback )
 
-Attempts to login to the NMT. Depending on the current state, it will write `nmt.password` to the underlying socket. Once a response comes back, it will callback with `callback( error )`. If the socket emits a chunk containing an `*`, then we know the password was incorrect and we emit an error; If the socket emits a chunk containing a `$`, then we know that either the login was successful or we were already logged in.
+Attempts to login to the NMT. Depending on the current state, it will write `nmt.password` to the underlying socket. Once a proper response comes back, it will callback with `callback( error )`. If the socket emits a chunk containing an `*`, then we know the password was incorrect and we emit an error; If the socket emits a chunk containing a `$`, then we know that either the login was successful or we were already logged in.
+
+### logout( callback )
+
+Attempts to logout of the NMT. Depending on the current state, it will write `logout` to the underlying socket. Once a proper response comes back, it will callback with `callback( error )`. If the socket emits a chunk containing an `*`, then we know it was successful.
 
 ### enterRealTime( callback )
 
@@ -76,3 +86,5 @@ Attempts to get the NMT in dB flow mode by writing `level repe` to the underlyin
 * at-login
 * at-prompt
 * reading-leqs
+
+While this module emits standard `data` events you would expect from a stream, it also emits a more useful `leq` that is pre-parsed. So you're not getting the strings straight from the wire (like the data from the console interface and pressurized leq readings in the real-time flow mode).
