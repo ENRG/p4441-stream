@@ -1,0 +1,35 @@
+{
+  "name": "p4441-stream",
+  "version": "0.1.0",
+  "description": "A streaming interface for Brüel & Kjær's p4441 noise analyzer over a TCP connection",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha -R spec -b"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ENRG/p4441-stream.git"
+  },
+  "keywords": [
+    "Brüel",
+    "&",
+    "Kjær",
+    "NMT",
+    "p4441"
+  ],
+  "author": "John Fawcett",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/ENRG/p4441-stream/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-contrib-jshint": "~0.8.0",
+    "async": "~0.2.10",
+    "mocha": "~1.17.1"
+  }
+}

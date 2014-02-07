@@ -23,12 +23,12 @@ var leqStream = nmt.getLeqStream({
 , password: 'my-password'
 });
 
+// => 44.7, 45.3, 44.9...
 leqStream.pipe( process.stdout );
 
+// Optional callback
 leqStream.connect( function( error ){
   /* You may handle errors in callback or in `error` events */
-
-  leqStream.login().enterRealTime();
 });
 ```
 
@@ -51,7 +51,7 @@ Sets the NMT object if one did not pass the value into the factory function.
 
 ### connect( callback )
 
-Calls `connect` on the underlying source socket. Will callback with `callback( error )`. Also emits `connected`.
+Calls `connect` on the underlying source socket. Will callback with `callback( error )`. Also emits `connected`. Once connected, the stream will call `login` and then `enterRealTime` since we assume that the user simply wants to put the NMT in flow mode, this method takes care of everything.
 
 ### login( callback )
 
