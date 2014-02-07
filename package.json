@@ -1,6 +1,6 @@
 {
   "name": "p4441-stream",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A streaming interface for Brüel & Kjær's p4441 noise analyzer over a TCP connection",
   "main": "index.js",
   "directories": {
